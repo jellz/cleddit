@@ -1,7 +1,7 @@
 const express = require("express");
 const app = (module.exports = express.Router());
 const passwordless = require("passwordless");
-const { r } = require("../");
+const { r } = require("..");
 app.get("/", (req, res) => res.json({ status: "ok", msg: "hello world auth" }));
 
 app.post("/token",
