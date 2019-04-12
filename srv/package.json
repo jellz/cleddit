@@ -1,0 +1,25 @@
+{
+  "name": "auth-proxy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "author": "RONTheCookie <ronthecookie0101@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@sendgrid/mail": "^6.3.1",
+    "cookie-parser": "^1.4.4",
+    "dotenv": "^7.0.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "log": "^5.0.0",
+    "log-node": "^5.1.0",
+    "passwordless": "^1.1.3",
+    "passwordless-rethinkdbstore": "RONTheCookie/passwordless-rethinkdbstore",
+    "rethinkdbdash": "^2.3.31",
+    "session-rethinkdb": "^2.0.1"
+  },
+  "scripts": {
+    "start": "LOG_TIME=abs LOG_LEVEL=info node ."
+  }
+}
