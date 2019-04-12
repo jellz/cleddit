@@ -4,7 +4,8 @@ const passwordless = require("passwordless");
 const { r } = require("..");
 app.get("/", (req, res) => res.json({ status: "ok", msg: "hello world auth" }));
 
-app.post("/token",
+app.post(
+    "/token",
     passwordless.requestToken(async (email, delivery, callback, req) => {
         try {
             const user = await r
@@ -14,11 +15,12 @@ app.post("/token",
                 .run();
             callback(null, user.id); // yay found
         } catch (error) {
-            if (error.message.includes("Index out of bounds")) return callback(null, null); //not found
+            if (error.message.includes("Index out of bounds"))
+                return callback(null, null); //not found
             callback(error.message); // err
         }
     }),
     async (req, res) => {
-        res.json({status: "ok"});
+        res.json({ status: "ok" });
     }
 );
