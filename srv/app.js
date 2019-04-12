@@ -4,11 +4,11 @@ const port = process.env.PORT || 3000;
 require("log-node")();
 require("dotenv").config();
 const log = require("log");
-const passwordless = require("passwordless")
+const passwordless = require("passwordless");
 const RethinkDBStore = require("passwordless-rethinkdbstore");
 const session = require("express-session");
 const RDBStore = require("session-rethinkdb")(session);
-const sgMail = module.exports.sg = require("@sendgrid/mail");
+const sgMail = (module.exports.sg = require("@sendgrid/mail"));
 sgMail.setApiKey(process.env.SENDGRID_KEY);
 const hostURI = process.env.HOST_URI;
 const cookieSecret = process.env.COOKIE_SECRET;
@@ -22,9 +22,10 @@ if (process.env.DB_ADDR)
             port: parseInt(process.env.DB_ADDR.split(":")[1], 10)
         }
     ];
-const r = require(`rethinkdbdash`)(dbOpts); // Connect to RethinkDB
+const r = (module.exports.r = require(`rethinkdbdash`)(dbOpts)); // Connect to RethinkDB
 
 app.set("view engine", "ejs");
+app.use(express.json());
 app.use(require("cookie-parser")());
 const store = new RDBStore(r);
 app.use(
@@ -39,7 +40,8 @@ app.use(
 
 passwordless.init(new RethinkDBStore(dbOpts));
 app.use(passwordless.sessionSupport());
-app.use(passwordless.acceptToken({ successRedirect: "/"}));
+app.use(passwordless.acceptToken({ successRedirect: "/" }));
+app.use("/api", require("./api"));
 
 passwordless.addDelivery(
     async (tokenToSend, uidToSend, recipient, callback, req) => {
