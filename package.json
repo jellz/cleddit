@@ -6,7 +6,7 @@
     "author": "the cleddit team",
     "license": "MIT",
     "scripts": {
-        "start": "concurrently npm:proxy npm:server npm:client 'echo Listening on http://localhost:3000'",
+        "start": "concurrently yarn:proxy yarn:server yarn:client 'echo Listening on http://localhost:3000'",
         "proxy": "node .",
         "client": "cd client; PORT=8080 yarn dev",
         "server": "cd server; yarn start"
