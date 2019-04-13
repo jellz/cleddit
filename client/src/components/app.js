@@ -4,6 +4,7 @@ import { Router } from 'preact-router';
 // Code-splitting is automated for routes
 import Home from '../routes/home';
 import Login from '../routes/login';
+import LoginPostToken from '../routes/login/token';
 
 export default class App extends Component {
 	
@@ -17,6 +18,7 @@ export default class App extends Component {
 				<Router onChange={this.handleRouteChange}>
 					<Home path="/" />
 					<Login path="/login" />
+					<LoginPostToken path="/login/token/:token/:uid" />
 				</Router>
 			</div>
 		);
