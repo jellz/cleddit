@@ -49,7 +49,9 @@ passwordless.addDelivery(
             to: recipient,
             from: process.env.EMAIL_FROM,
             subject: "Cleddit Passwordless Login Code",
-            html: `Click <a href="${hostURI}/login/token/${tokenToSend}/${uidToSend}">here</a> to login to Cleddit.`
+            html: `Click <a href="${hostURI}/login/token/${tokenToSend}/${uidToSend}?registered_now=${
+                req.newUser
+            }">here</a> to login to Cleddit.`
         });
         callback();
     }

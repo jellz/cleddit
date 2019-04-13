@@ -9,7 +9,6 @@
     "@sendgrid/mail": "^6.3.1",
     "cookie-parser": "^1.4.4",
     "dotenv": "^7.0.0",
-    "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "log": "^5.0.0",

@@ -26,8 +26,14 @@ app.post(
                 .run();
             callback(null, user.id); // yay found
         } catch (error) {
-            if (error.message.includes("Index out of bounds"))
-                return callback(null, null); //not found
+            if (error.message.includes("Index out of bounds")) {
+                const u = { email, username: null };
+                const rethinkres = await r.table("users").insert(u).run();
+                u.id = rethinkres.generated_keys[0];
+                req.newUser = true; // for the code in app.js to catch
+                callback(null, u.id);
+                
+            }
             callback(error.message); // err
         }
     }),
