@@ -41,7 +41,7 @@ app.use(
 passwordless.init(new RethinkDBStore(dbOpts));
 app.use(passwordless.sessionSupport());
 app.use(passwordless.acceptToken({ successRedirect: "/" }));
-app.use("/", require("./api"));
+app.use("/api", require("./api"));
 
 passwordless.addDelivery(
     async (tokenToSend, uidToSend, recipient, callback, req) => {
