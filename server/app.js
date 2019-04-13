@@ -47,10 +47,11 @@ passwordless.addDelivery(
     async (tokenToSend, uidToSend, recipient, callback, req) => {
         await sgMail.send({
             to: recipient,
-            from: "no-reply@ronthecookie.me",
+            from: process.env.EMAIL_FROM,
             subject: "Cleddit Passwordless Login Code",
             html: `Click <a href="${hostURI}/login/token/${tokenToSend}/${uidToSend}">here</a> to login to Cleddit.`
         });
+        callback();
     }
 );
 
