@@ -6,7 +6,6 @@ html { background-color: #eee; font-family: -apple-system, BlinkMacSystemFont, "
   max-width: 650px;
   line-height: 1.6;
   font-size: 18px;
-  color: black;
   padding: 0 10px; 
 }
 
@@ -38,3 +37,5 @@ input, input:focus {
 .login-submit:active {
   opacity: 0.75;
 }
+
+.login-submitted-text { color: rgb(41, 187, 41); }
