@@ -1,0 +1,19 @@
+{
+    "name": "cleddit",
+    "version": "1.0.0",
+    "main": "proxy.js",
+    "repository": "git@github.com:jellz/cleddit.git",
+    "author": "the cleddit team",
+    "license": "MIT",
+    "scripts": {
+        "start": "concurrently npm:proxy npm:server npm:client 'echo Listening on http://localhost:3000'",
+        "proxy": "node .",
+        "client": "cd client; PORT=8080 yarn dev",
+        "server": "cd server; yarn start"
+    },
+    "dependencies": {
+        "concurrently": "^4.1.0",
+        "express": "^4.16.4",
+        "express-http-proxy": "^1.5.1"
+    }
+}
