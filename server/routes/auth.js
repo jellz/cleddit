@@ -24,3 +24,11 @@ app.post(
         res.json({ status: "ok" });
     }
 );
+
+app.post(
+    "/login",
+    passwordless.acceptToken({ allowPost: true }),
+    async (req, res) => {
+        res.json({status: "ok"});
+    }
+);
