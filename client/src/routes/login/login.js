@@ -2,6 +2,7 @@ import { h, Component } from 'preact';
 import { API_BASE } from '../../.config';
 import { checkAuthenticated } from '../../util';
 import { route } from 'preact-router';
+import linkState from 'linkstate';
 
 const COMMON_INBOXES = {
   'outlook.com': 'https://login.live.com',
@@ -48,10 +49,6 @@ export default class Login extends Component {
     this.setState({ submitted: true, inboxUrl: COMMON_INBOXES[emailDomain] ? COMMON_INBOXES[emailDomain] : null });
   }
 
-  handleEmailChange(event) {
-    this.setState({ emailValue: event.target.value });
-  }
-
 	render() {
 		return (
 			<div>
@@ -59,7 +56,7 @@ export default class Login extends Component {
           <h1>Login</h1>
           <p>We use a passwordless authentication system so you don't need to remember another password. <span className='bold'>Just enter your email address below and we'll email you a link you can use to sign in!</span></p>
           { !this.state.submitted && <form onSubmit={this.handleSubmit}>
-            <input type='email' required placeholder='john@cleddit.com' autofocus value={this.state.emailValue} onChange={this.handleEmailChange} name='login-email' className='login-email-input' />
+            <input type='email' required placeholder='john@cleddit.com' autofocus value={this.state.emailValue} onChange={linkState(this, 'emailValue')} name='login-email' className='login-email-input' />
             <input type='submit' value='Submit' className='login-submit bold' />
           </form> }
           { this.state.submitted && <div className='login-submitted-text'>
