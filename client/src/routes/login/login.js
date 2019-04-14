@@ -1,5 +1,7 @@
 import { h, Component } from 'preact';
 import { API_BASE } from '../../.config';
+import { checkAuthenticated } from '../../util';
+import { route } from 'preact-router';
 
 const COMMON_INBOXES = {
   'outlook.com': 'https://login.live.com',
@@ -25,6 +27,10 @@ export default class Login extends Component {
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+	async componentDidMount() {
+		if (await checkAuthenticated()) return route('/');
+	}
 
   async handleSubmit(event) {
     event.preventDefault();
