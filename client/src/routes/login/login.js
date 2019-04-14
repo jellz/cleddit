@@ -1,18 +1,26 @@
 import { h, Component } from 'preact';
 import { API_BASE } from '../../.config';
 
-// const COMMON_MAILBOXES = {
-//   'outlook.com': 'https://login.live.com',
-//   'hotmail.com': 'https://login.live.com',
-//   'gmail.com': 'https://mail.google.com'
-// }
+const COMMON_INBOXES = {
+  'outlook.com': 'https://login.live.com',
+  'hotmail.com': 'https://login.live.com',
+  'gmail.com': 'https://mail.google.com',
+  'yahoo.com': 'https://login.yahoo.com/?.done=https%3A%2F%2Fmail.yahoo.com',
+  'icloud.com': 'https://www.icloud.com/',
+  'inbox.com': 'https://www.inbox.com/login.aspx?redir=/login.aspx',
+  'mail.com': 'https://www.mail.com/int/#.2068504-header-navlogin2-1',
+  'aol.com': 'https://login.aol.com',
+  'yandex.com': 'https://passport.yandex.com/auth?from=mail',
+  'protonmail.com': 'https://mail.protonmail.com/login'
+}
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       emailValue: null,
-      submitted: false
+      submitted: false,
+      inboxUrl: null
     }
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,7 +38,8 @@ export default class Login extends Component {
       }
     });
     if (!res.ok) throw new Error(`Token request failed, code: ${res.status}`);
-    this.setState({ submitted: true });
+    let emailDomain = this.state.emailValue.split('@')[1];
+    this.setState({ submitted: true, inboxUrl: COMMON_INBOXES[emailDomain] ? COMMON_INBOXES[emailDomain] : null });
   }
 
   handleEmailChange(event) {
@@ -48,7 +57,7 @@ export default class Login extends Component {
             <input type='submit' value='Submit' className='login-submit bold' />
           </form> }
           { this.state.submitted && <div className='login-submitted-text'>
-            We have sent an email to your inbox. Click the link in the email to login!<br />
+            We have sent an email to {this.state.inboxUrl ? <a className='login-inbox-link' href={this.state.inboxUrl}>your inbox</a> : 'your inbox'}. Click the link in the email to login!<br />
           </div> }
         </div>
       </div>
