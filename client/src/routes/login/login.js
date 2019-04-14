@@ -25,7 +25,7 @@ export default class Login extends Component {
       submitted: false,
       inboxUrl: null
     }
-    this.handleEmailChange = this.handleEmailChange.bind(this);
+    
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
