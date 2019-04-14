@@ -1,9 +1,10 @@
 import { h, Component } from 'preact';
-import cookies from 'browser-cookies';
+import { checkAuthenticated } from '../../util';
+import { route } from 'preact-router';
 
 export default class Home extends Component {
-	componentDidMount() {
-		if (!cookies.get('cleddit_session')) return window.location.href = '/login';
+	async componentDidMount() {
+		if (!await checkAuthenticated()) return route('/login');
 	}
 
 	render() {
