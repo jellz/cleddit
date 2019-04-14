@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import { API_BASE } from '../../../.config';
+import { route } from 'preact-router';
 
 export default class LoginPostToken extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ export default class LoginPostToken extends Component {
       }
     });
     if (!res.ok) throw new Error(`Login request failed, code: ${res.statusCode}`);
-    window.location.href = '/';
+    route('/');
   }
 
 	render() {
