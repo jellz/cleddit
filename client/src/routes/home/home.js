@@ -1,10 +1,13 @@
 import { h, Component } from 'preact';
-import { checkAuthenticated } from '../../util';
 import { route } from 'preact-router';
 
 export default class Home extends Component {
+	constructor(props) {
+		super(props);
+	}
+
 	async componentDidMount() {
-		if (!await checkAuthenticated()) return route('/login');
+		setTimeout(() => { if (!this.props.auth) return route('/login'); });
 	}
 
 	render() {

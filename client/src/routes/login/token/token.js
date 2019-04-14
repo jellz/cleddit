@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import { route } from 'preact-router';
+import '../../../styles/login';
 
 export default class LoginPostToken extends Component {
   constructor(props) {
@@ -7,6 +8,7 @@ export default class LoginPostToken extends Component {
   }
 
   async componentDidMount() {
+		setTimeout(() => { if (this.props.auth) return route('/'); });
     let res = await fetch('/api/auth/login', {
       method: 'post',
       body: JSON.stringify({

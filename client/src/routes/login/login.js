@@ -1,5 +1,4 @@
 import { h, Component } from 'preact';
-import { checkAuthenticated } from '../../util';
 import { route } from 'preact-router';
 import linkState from 'linkstate';
 import '../../styles/login';
@@ -30,7 +29,7 @@ export default class Login extends Component {
   }
 
 	async componentDidMount() {
-		if (await checkAuthenticated()) return route('/');
+		setTimeout(() => { if (this.props.auth) return route('/'); });
 	}
 
   async handleSubmit(event) {
