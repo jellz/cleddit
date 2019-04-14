@@ -1,5 +1,4 @@
 import { h, Component } from 'preact';
-import { API_BASE } from '../../.config';
 import { checkAuthenticated } from '../../util';
 import { route } from 'preact-router';
 import linkState from 'linkstate';
@@ -25,7 +24,7 @@ export default class Login extends Component {
       submitted: false,
       inboxUrl: null
     }
-    
+
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -35,7 +34,7 @@ export default class Login extends Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-    let res = await fetch(API_BASE + '/api/auth/token', {
+    let res = await fetch('/api/auth/token', {
       method: 'post',
       body: JSON.stringify({
         user: this.state.emailValue
