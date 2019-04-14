@@ -2,6 +2,7 @@ import { h, Component } from 'preact';
 import { checkAuthenticated } from '../../util';
 import { route } from 'preact-router';
 import linkState from 'linkstate';
+import '../../styles/login';
 
 const COMMON_INBOXES = {
   'outlook.com': 'https://login.live.com',
