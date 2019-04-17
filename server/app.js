@@ -50,7 +50,7 @@ passwordless.addDelivery(
             from: process.env.EMAIL_FROM,
             subject: "Cleddit Passwordless Login Code",
             html: `Click <a href="${hostURI}/login/token/${tokenToSend}/${uidToSend}?registered_now=${
-                req.newUser
+                req.newUser || "false"
             }">here</a> to login to Cleddit.`
         });
         callback();

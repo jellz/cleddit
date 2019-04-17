@@ -7,7 +7,7 @@ const clientProxy = proxy({ target: "http://localhost:8080", ws: true });
 app.use("/api", proxy({ target: "http://localhost:3001" }));
 app.use("/", clientProxy);
 
-const server = app.listen(port);
+const server = app.listen(port, () => console.log(`Listening on port ${port}`));
 
 setTimeout(() => {
     console.log("\n".repeat(5));
