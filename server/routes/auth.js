@@ -8,21 +8,25 @@ const Joi = require("joi");
 const joiDefs = require("../util").defs;
 app.get("/", (req, res) => res.json({ status: "ok", msg: "hello world auth" }));
 
+/**
+ * @api {post} /logout  Logout
+ *
+ */
 app.post("/logout", passwordless.logout(), (req, res) => {
     res.json({ status: "ok" });
 });
 
-app.get("/status", (req, res) => {
-    res.json({
-        status: "error: Use /api/auth/me instead",
-        auth: req.user ? "user" : "anon"
-    });
-});
-
+/**
+ * @api {get} /me Get user info
+ *
+ */
 app.get("/me", (req, res) => {
     res.status(req.user ? 200 : 404).json({ status: "ok", data: req.user });
 });
-
+/**
+ * @api {post} /token first step of login
+ * @apiParam {String} user
+ */
 app.post(
     "/token",
     ratelimit,
@@ -52,7 +56,11 @@ app.post(
         res.json({ status: "ok" });
     }
 );
-
+/**
+ * @api {post} /login 2nd step of login
+ * @apiParam {String} token
+ * @apiParam {String} uid
+ */
 app.post(
     "/login",
     ratelimit,
@@ -62,14 +70,17 @@ app.post(
         res.json({ status: "ok" });
     }
 );
-
-app.post(
-    "/username",
+/**
+ * @api {patch} /user modify user
+ *
+ * @apiParam {String} username
+ *
+ */
+app.patch(
+    "/user",
     eJoi(
         {
-            body: Joi.object().keys({
-                username: joiDefs.username.required()
-            })
+            body: joiDefs.changeUser
         },
         { joi: Joi, wantResponse: true }
     ),
