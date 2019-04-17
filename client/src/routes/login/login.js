@@ -29,6 +29,7 @@ export default class Login extends Component {
   }
 
 	async componentDidMount() {
+    console.log(this.props.auth);
 		setTimeout(() => { if (this.props.auth) return route('/'); });
 	}
 
