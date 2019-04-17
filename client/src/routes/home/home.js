@@ -7,14 +7,16 @@ export default class Home extends Component {
 	}
 
 	async componentDidMount() {
+		console.log(this.props.auth);
 		setTimeout(() => { if (!this.props.auth) return route('/login'); });
+		console.log(this.props);
 	}
 
 	render() {
 		return (
 			<div>
-				<h1>Welcome home!</h1>
+				<h1>{JSON.stringify(this.props.auth)}</h1>
 			</div>
-		)		
+		)
 	}
 }

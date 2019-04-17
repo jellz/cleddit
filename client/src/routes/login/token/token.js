@@ -20,6 +20,7 @@ export default class LoginPostToken extends Component {
       }
     });
     if (!res.ok) throw new Error(`Login request failed, code: ${res.statusCode}`);
+    await this.props.refreshAuthProp();
     route('/');
   }
 
